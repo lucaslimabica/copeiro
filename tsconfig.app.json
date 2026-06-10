@@ -7,6 +7,12 @@
         "types": ["vite/client"],
         "skipLibCheck": true,
 
+        /* Path alias — keep in sync with vite.config.ts */
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"]
+        },
+
         /* Bundler mode */
         "moduleResolution": "bundler",
         "allowImportingTsExtensions": true,
