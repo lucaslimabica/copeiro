@@ -1,11 +1,14 @@
-import CardExample from '@/components/CardExample';
+//import SelecoesList from '@/components/SelecoesList';
 import TopBar from '@/components/TopBar';
 
 export default function App() {
     return (
-        <div className="min-h-screen">
-            <TopBar />
-            <CardExample />
+        <div>
+            <div className="bg-surface text-main">
+                <TopBar />
+            </div>
+            <div>
+            </div>
         </div>
     );
 }
