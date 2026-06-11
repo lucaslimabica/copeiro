@@ -30,12 +30,14 @@ function formatarProximoJogo(jogo: JogoComOponente, selecaoId: number) {
 
     // hora no fuso de Lisboa 
     const horaPT = dataObjeto.toLocaleTimeString('pt-PT', {
+        day: '2-digit',
+        month: '2-digit',
         hour: '2-digit',
         minute: '2-digit',
         timeZone: 'Europe/Lisbon'
     });
 
-    return `vs ${oponente ?? '?'} · ${horaBR} BR ${horaPT} PT`;
+    return `vs ${oponente ?? '?'} · ${horaBR} BR | ${horaPT} PT`;
 }
 
 export function CardSelecoesPrevia() {
@@ -125,7 +127,7 @@ export function CardSelecoesPrevia() {
                     );
                 })}
             </ul>
-            <a className="cursor-pointer text-sm text-muted hover:underline">
+            <a className="cursor-pointer text-sm text-muted hover:underline" href='/jogos'>
                 Ver Mais...
             </a>
         </article>
