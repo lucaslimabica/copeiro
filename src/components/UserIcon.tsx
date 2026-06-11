@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
-import { CircleUserRound, Palette } from 'lucide-react';
+import { CircleUserRound, Palette, LogOut } from 'lucide-react';
+import { useAuth } from '@/lib/auth';
 
 // Traduções que já tinhas definido
 const translations = {
@@ -16,6 +17,7 @@ const currentLanguage: keyof typeof translations = 'pt';
 type Theme = 'light' | 'dark' | 'midnight';
 
 const UserIcon = () => {
+    const { user, perfil, signOut } = useAuth();
     // Controla o pop-up aberto ou não
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -66,7 +68,19 @@ const UserIcon = () => {
 
             {/* Pop-up */}
             {isOpen && (
-                <div className="absolute right-0 mt-2 w-48 rounded-xl bg-surface border border-border-main p-3 shadow-lg z-50 animate-in fade-in slide-in-from-top-1 duration-100">
+                <div className="absolute right-0 mt-2 w-56 rounded-xl bg-surface border border-border-main p-3 shadow-lg z-50 animate-in fade-in slide-in-from-top-1 duration-100">
+                    {user && (
+                        <div className="mb-3 px-1">
+                            {perfil?.nickname && (
+                                <p className="text-sm font-semibold text-main truncate">
+                                    {perfil.nickname}
+                                </p>
+                            )}
+                            <p className="text-xs text-muted truncate">
+                                {user.email}
+                            </p>
+                        </div>
+                    )}
                     <div className="text-xs font-semibold text-main mb-2 px-1">
                         Menu de Opções
                     </div>
@@ -97,12 +111,22 @@ const UserIcon = () => {
                         </select>
                     </div>
 
-                    {/* No futuro, podes adicionar mais opções aqui facilmente: */}
-                    {/* <hr className="border-border-main my-2" />
-                    <button className="w-full text-left text-xs p-2 hover:bg-main/5 rounded-lg text-red-500">
-                        Sair da Conta
-                    </button> 
-                    */}
+                    {user && (
+                        <>
+                            <hr className="border-border-main my-2" />
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setIsOpen(false);
+                                    signOut();
+                                }}
+                                className="w-full flex items-center gap-1.5 text-left text-xs p-2 hover:bg-main/5 rounded-lg text-red-500 cursor-pointer"
+                            >
+                                <LogOut size={14} />
+                                Sair da conta
+                            </button>
+                        </>
+                    )}
                 </div>
             )}
         </div>
