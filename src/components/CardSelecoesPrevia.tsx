@@ -47,10 +47,7 @@ export function CardSelecoesPrevia() {
         <article className="flex w-full max-w-sm flex-col items-center gap-4 rounded-2xl border border-secondary bg-surface p-6 shadow-sm">
             <ul className="flex w-full flex-col items-center gap-2">
                 {selecoes.map((item) => (
-                    <li
-                        key={item.id}
-                        className="text-sm font-bold text-main"
-                    >
+                    <li key={item.id} className="text-sm font-bold text-main">
                         {item.nome}
                     </li>
                 ))}
