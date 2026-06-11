@@ -12,8 +12,8 @@ type JogoCompleto = {
     fora_gol: number | null;
     inicio: string;
     status: 'por_vir' | 'ao_vivo' | 'finalizado';
-    casa: { id: number; nome: string; abreviacao: string } | null;
-    fora: { id: number; nome: string; abreviacao: string } | null;
+    casa: { id: number; nome: string; abreviacao: string; bandeira: string } | null;
+    fora: { id: number; nome: string; abreviacao: string; bandeira: string } | null;
 };
 
 function StatusLabel({ jogo }: { jogo: JogoCompleto }) {
@@ -66,7 +66,7 @@ function SelecaoBotao({
             type="button"
             className="rounded-lg border border-secondary bg-base px-2.5 py-1 text-xs font-bold text-main hover:opacity-80 transition-opacity cursor-pointer"
         >
-            {selecao?.abreviacao ?? '?'}
+            {selecao?.abreviacao ?? '?'} {selecao?.bandeira ?? '?'}
         </button>
     );
 }
@@ -138,8 +138,8 @@ export function CardJogos() {
                 .select(
                     `
                     id, casa_id, fora_id, casa_gol, fora_gol, inicio, status,
-                    casa:selecao!casa_id(id, nome, abreviacao),
-                    fora:selecao!fora_id(id, nome, abreviacao)
+                    casa:selecao!casa_id(id, nome, abreviacao, bandeira),
+                    fora:selecao!fora_id(id, nome, abreviacao, bandeira)
                     `,
                 )
                 .order('inicio', { ascending: true })

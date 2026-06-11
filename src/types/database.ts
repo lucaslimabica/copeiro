@@ -191,16 +191,19 @@ export type Database = {
                     abreviacao: string;
                     id: number;
                     nome: string;
+                    bandeira: string;
                 };
                 Insert: {
                     abreviacao: string;
                     id?: never;
                     nome: string;
+                    bandeira: string;
                 };
                 Update: {
                     abreviacao?: string;
                     id?: never;
                     nome?: string;
+                    bandeira?: string;
                 };
                 Relationships: [];
             };

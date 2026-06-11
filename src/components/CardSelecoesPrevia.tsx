@@ -118,7 +118,7 @@ export function CardSelecoesPrevia() {
                             <span className="font-bold text-main">
                                 {item.nome}
                             </span>
-                            <span className="text-muted text-[12px]">
+                            <span className="text-muted text-[10px]">
                                 {proximo
                                     ? formatarProximoJogo(proximo, item.id)
                                     : '—'}
