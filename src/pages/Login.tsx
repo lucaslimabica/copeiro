@@ -105,8 +105,8 @@ export default function Login() {
                     className="text-xs text-muted hover:text-main hover:underline cursor-pointer"
                 >
                     {mode === 'signin'
-                        ? 'Não tenho conta — criar'
-                        : 'Já tenho conta — entrar'}
+                        ? 'Não tenho conta, criar'
+                        : 'Já tenho conta, entrar'}
                 </button>
             </form>
         </div>
