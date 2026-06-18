@@ -88,14 +88,18 @@ function Placar({ jogo }: { jogo: JogoCompleto }) {
 
 function JogoRow({ jogo }: { jogo: JogoCompleto }) {
     return (
-        <li className="flex flex-wrap items-center gap-3 py-3">
-            <SelecaoBotao selecao={jogo.casa} />
-            <Placar jogo={jogo} />
-            <SelecaoBotao selecao={jogo.fora} />
-            <div className="ml-2">
-                <StatusLabel jogo={jogo} />
+        <li className="flex flex-col md:flex-row items-center justify-between gap-4 py-4 md:py-3 border-b border-secondary/50 last:border-0 w-full">
+            <div className="flex flex-col items-center md:flex-row md:items-center gap-3 w-full md:w-auto">
+                <div className="flex items-center justify-center gap-3">
+                    <SelecaoBotao selecao={jogo.casa} />
+                    <Placar jogo={jogo} />
+                    <SelecaoBotao selecao={jogo.fora} />
+                </div>
+                <div className="text-center md:text-left md:ml-2">
+                    <StatusLabel jogo={jogo} />
+                </div>
             </div>
-            <div className="ml-auto flex items-center gap-2">
+            <div className="flex items-center justify-center gap-2 w-full md:w-auto md:ml-auto">
                 {jogo.status !== 'finalizado' ? (
                     <>
                         <Popover label="Palpitar">
@@ -111,7 +115,7 @@ function JogoRow({ jogo }: { jogo: JogoCompleto }) {
                                     {jogo.casa?.nome} vs {jogo.fora?.nome}
                                 </p>
                                 <p className="mt-1 text-muted">
-                                    Criar duelo — em breve (falta auth).
+                                    Criar duelo (em breve)
                                 </p>
                             </div>
                         </Popover>
