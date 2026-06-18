@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Popover } from '@/components/Popover';
+import { FormPalpite } from '@/components/FormPalpite';
 
 const PAGE_SIZE = 20;
 
@@ -94,27 +95,32 @@ function JogoRow({ jogo }: { jogo: JogoCompleto }) {
             <div className="ml-2">
                 <StatusLabel jogo={jogo} />
             </div>
-            <div className="ml-auto flex gap-2">
-                <Popover label="Palpitar">
-                    <div className="text-xs">
-                        <p className="font-semibold text-main">
-                            {jogo.casa?.nome} vs {jogo.fora?.nome}
-                        </p>
-                        <p className="mt-1 text-muted">
-                            Form de palpite — em breve (falta auth).
-                        </p>
-                    </div>
-                </Popover>
-                <Popover label="Duelar">
-                    <div className="text-xs">
-                        <p className="font-semibold text-main">
-                            {jogo.casa?.nome} vs {jogo.fora?.nome}
-                        </p>
-                        <p className="mt-1 text-muted">
-                            Criar duelo — em breve (falta auth).
-                        </p>
-                    </div>
-                </Popover>
+            <div className="ml-auto flex items-center gap-2">
+                {jogo.status !== 'finalizado' ? (
+                    <>
+                        <Popover label="Palpitar">
+                            <FormPalpite 
+                                jogoId={jogo.id} 
+                                casaNome={jogo.casa?.nome ?? 'Casa'} 
+                                foraNome={jogo.fora?.nome ?? 'Fora'} 
+                            />
+                        </Popover>
+                        <Popover label="Duelar">
+                            <div className="text-xs">
+                                <p className="font-semibold text-main">
+                                    {jogo.casa?.nome} vs {jogo.fora?.nome}
+                                </p>
+                                <p className="mt-1 text-muted">
+                                    Criar duelo — em breve (falta auth).
+                                </p>
+                            </div>
+                        </Popover>
+                    </>
+                ) : (
+                    <span className="text-xs px-2.5 py-1 rounded bg-secondary/30 text-muted font-medium italic">
+                        Palpites encerrados
+                    </span>
+                )}
             </div>
         </li>
     );
@@ -142,7 +148,7 @@ export function CardJogos() {
                     fora:selecao!fora_id(id, nome, abreviacao, bandeira)
                     `,
                 )
-                .order('inicio', { ascending: true })
+                .order('inicio', { ascending: false })
                 .range(start, start + PAGE_SIZE - 1);
             if (error) throw error;
             const novos = (data ?? []) as JogoCompleto[];

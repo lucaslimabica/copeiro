@@ -11,6 +11,7 @@ import Ranks from '@/pages/Ranks.tsx';
 import Palpites from '@/pages/Palpites.tsx';
 import NotFound from '@/pages/NotFound';
 import Login from '@/pages/Login.tsx';
+import Dev from '@/components/DevJogos.tsx';
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
                     { path: 'jogos', element: <Jogos /> },
                     { path: 'ranks', element: <Ranks /> },
                     { path: 'palpites', element: <Palpites /> },
+                    { path: 'dev', element: <Dev /> },
                     { path: '*', element: <NotFound /> },
                 ],
             },

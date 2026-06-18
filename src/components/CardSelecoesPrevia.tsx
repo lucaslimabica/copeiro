@@ -53,7 +53,7 @@ export function CardSelecoesPrevia() {
                 setLoading(true);
 
                 const { data: selecoesData, error: erroSelecoes } =
-                    await supabase.from('selecao').select('id, nome, abreviacao');
+                    await supabase.from('selecao').select('id, nome, abreviacao, bandeira');
                 if (erroSelecoes) throw erroSelecoes;
                 if (!selecoesData) return;
 
@@ -61,6 +61,11 @@ export function CardSelecoesPrevia() {
                     .sort(() => 0.5 - Math.random())
                     .slice(0, 5);
                 const ids = aleatorias.map((s) => s.id);
+
+                // --- GERAÇÃO DA DATA FILTRO ---
+                const hoje = new Date();
+                hoje.setHours(0, 0, 0, 0); 
+                const hojeISO = hoje.toISOString();
 
                 const { data: jogosData, error: erroJogos } = await supabase
                     .from('jogo')
@@ -72,6 +77,7 @@ export function CardSelecoesPrevia() {
                         `,
                     )
                     .in('status', ['por_vir', 'ao_vivo'])
+                    .gte('inicio', hojeISO) // <-- O FILTRO ENTRA AQUI
                     .or(
                         `casa_id.in.(${ids.join(',')}),fora_id.in.(${ids.join(',')})`,
                     )
