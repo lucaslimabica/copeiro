@@ -30,7 +30,7 @@ export function FormPalpite({ jogoId, casaNome, foraNome }: FormPalpiteProps) {
                 return;
             }
 
-            let finalVencedor: string = vencedorSimples;
+            let finalVencedor: VencedorLado = vencedorSimples;
             let finalCasaGol: number | null = null;
             let finalForaGol: number | null = null;
 
