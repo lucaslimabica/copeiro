@@ -226,7 +226,7 @@ export function CardRankingPrevia() {
             {/* Link de redirecionamento */}
             <div className="border-t border-secondary/40 pt-2 flex justify-center">
                 <a 
-                    href="/rank" 
+                    href="/ranks" 
                     className="group inline-flex items-center gap-1 text-xs text-muted font-medium hover:text-primary transition-colors cursor-pointer"
                 >
                     Ver Ranking Completo 
